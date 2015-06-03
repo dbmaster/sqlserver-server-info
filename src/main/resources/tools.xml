@@ -1,0 +1,14 @@
+<tools>
+        <tool id="sqlserver-server-info" title="SQL Server::Server Info" projectTypes="inventory">
+
+            <description>Retrieves information about sql servers</description>
+
+            <parameters>
+              <parameter name="p_servers"        title="Server"   type="string" required="false" multiple="true" 
+                         suggestion="connections" width="300" />
+
+            </parameters>
+
+            <output  script="sql-server-info.groovy" type="html" />
+        </tool>
+</tools>
