@@ -9,6 +9,7 @@ import com.branegy.dbmaster.connection.ConnectionProvider
 import com.branegy.dbmaster.connection.JdbcConnector
 import groovy.sql.Sql
 // TODO - read this http://sqlblog.com/blogs/kalen_delaney/archive/2007/12/08/hyperthreaded-or-not.aspx
+// TODO  EXEC    sys.xp_readerrorlog 0, 1, 'System Manufacturer', '...'
 def toURL = { link ->
     link==null ? "NULL" : link.encodeURL().replaceAll("\\+", "%20")
 }
@@ -164,7 +165,7 @@ dbConnections.each { connectionInfo ->
                            FROM sys.dm_os_sys_info WITH (NOLOCK) OPTION (RECOMPILE)"""
         }
         row = sql.firstRow(query)
-        println """    <td>${row.cpu_count}</td>
+        println """ <td>${row.cpu_count}</td>
                     <td>${row.hyperthread_ratio}</td>
                     <td>${row.physical_cpu_count}</td>
                     <td>${row.memory}</td>"""
@@ -177,9 +178,6 @@ dbConnections.each { connectionInfo ->
     // SELECT name, value, value_in_use, [description] 
     // FROM sys.configurations WITH (NOLOCK)
     // ORDER BY name  OPTION (RECOMPILE);
-
-
-        
         println "</tr>"
 
         dbm.closeResourceOnExit(connection)
