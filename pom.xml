@@ -3,20 +3,18 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.dbmaster.tools</groupId>
-
     <artifactId>sqlserver-server-info</artifactId>
 
     <name>SQL Server::Server Info</name>
     <description>Collects various information about sql server</description>
 
-    <version>0.1.4</version>
+    <version>0.1.5</version>
     <packaging>bundle</packaging>
 
     <parent>
         <groupId>io.dbmaster.tools</groupId>
         <artifactId>dbmaster-root</artifactId>
-        <version>1.0.0</version>
+        <version>1.10</version>
     </parent>
 
     <build>
@@ -24,11 +22,8 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.3.7</version>
-                <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Tags>inventory,sqlserver</Tags>
                         <Author>slava.christin</Author>
                     </instructions>
@@ -36,30 +31,21 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.8</version>
-                <executions>
-                    <execution>
-                        <id>copy-installed</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>${project.packaging}</type>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${plugins.output.folder}</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+         </plugin>
+         <plugin>
+            <groupId>org.codehaus.gmaven</groupId>
+            <artifactId>gmaven-plugin</artifactId>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+         </plugin>
         </plugins>
     </build>
 
